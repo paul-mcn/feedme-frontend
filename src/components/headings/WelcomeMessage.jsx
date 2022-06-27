@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const WelcomeMessage = ({ message }) => {
     return (
         <div>
-            <h1 className='font-bold text-2xl'>{message}</h1>
+            <h1 className='font-bold text-2xl'>{message}</h1> 
         </div>
     )
 };

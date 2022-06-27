@@ -1,6 +1,6 @@
 import React from 'react';
-import Tooltip from './Tooltip';
-import FormInput from './FormInput';
+import Tooltip from './misc/Tooltip';
+import FormInput from './inputs/FormInput';
 
 const AddMealWindow = () => {
     const locationTooltip = "Where is the meal located? e.g. website or book and page"

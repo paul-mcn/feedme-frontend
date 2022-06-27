@@ -7,9 +7,10 @@ const GhostInput = props => {
             <input
                 placeholder={props.placeholder}
                 value={props.value}
-                className='font-bold px-4 py-2 outline-0' 
+                className='font-bold px-4 py-2 outline-0 w-full' 
                 onInput={props.onInput}
                 pattern={props.pattern}
+                type={props.type}
             />
         </div>
     )
@@ -23,7 +24,8 @@ GhostInput.propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.string,
     onInput: PropTypes.func,
-    pattern: PropTypes.string
+    pattern: PropTypes.string,
+    type: PropTypes.string
 }
 
 export default GhostInput
