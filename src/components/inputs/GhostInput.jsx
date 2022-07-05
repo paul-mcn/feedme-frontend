@@ -11,6 +11,10 @@ const GhostInput = props => {
                 onInput={props.onInput}
                 pattern={props.pattern}
                 type={props.type}
+                max={props.max}
+                min={props.min}
+                step={props.step}
+                required={props.required}
             />
         </div>
     )
@@ -25,7 +29,11 @@ GhostInput.propTypes = {
     value: PropTypes.string,
     onInput: PropTypes.func,
     pattern: PropTypes.string,
-    type: PropTypes.string
+    type: PropTypes.string,
+    max: PropTypes.number,
+    min: PropTypes.number,
+    step: PropTypes.number,
+    required: PropTypes.bool
 }
 
 export default GhostInput

@@ -4,27 +4,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import ListItems from '../../components/misc/ListItems'
 
-const FilterButton = ({ text }) => {
+const FilterButton = ({ text, items, children }) => {
 
     const [openDropdown, setOpenDropdown] = useState(false);
 
-    const handleopenDropdown = () => setOpenDropdown(!openDropdown)
+    const handleOpenDropdown = () => setOpenDropdown(!openDropdown)
 
     return (
         <div className='w-full group'>
             <button className='hover:bg-gray-100/50 duration-300 w-full flex items-center px-2 py-4'
-                onClick={handleopenDropdown}>
+                onClick={handleOpenDropdown}>
                 <p className='flex-1 text-left'>{text}</p>
                 <FontAwesomeIcon icon={faPlus} className={openDropdown ? 'hidden' : ''} />
                 <FontAwesomeIcon icon={faMinus} className={openDropdown ? '' : 'hidden'} />
             </button>
-            <ListItems className={`${openDropdown ? '': 'h-0'} overflow-hidden`} items={[]} />
+            <div className={`${openDropdown ? 'h-max': 'h-0'} overflow-hidden duration-100`}>
+                {children}
+            </div>
+            {/* <ListItems className={`${openDropdown ? '': 'h-0'} overflow-hidden`} items={items} /> */}
         </div>
     )
 }
 
 FilterButton.propTypes = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired
+}
+
+FilterButton.defaultProps = {
+    items: []
 }
 
 export default FilterButton

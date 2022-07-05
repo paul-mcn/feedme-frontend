@@ -13,21 +13,23 @@ const MealsFilterInterface = props => (
 
             if (loading) return <LoadingMessage />
 
-            if (error) return <ErrorMessage errorMessage={error} />
+            if (error) return <ErrorMessage errorMessage={"Couldnt fetch data. Something went wrong, try again later."} />
 
             if (data) {
                 return (
-                    <div className='grid grid-cols-4 gap-10 content-center'>
+                    <div className='grid md:grid-cols-4 gap-10 content-center'>
                         <div className='row-span-2 mt-10'>
-                            <FilterSettingsSection  meals={data.meals} />
+                            <FilterSettingsSection meals={data.meals} />
                         </div>
-                        <div className='col-span-3 flex'>
+                        <div className='col-span-2 md:col-span-3 flex'>
                             <div className="flex-1 flex">
                                 <NavigationButton text='Add Meal' to='/meals/create-meal' className="bg-green-400 hover:bg-green-400" />
                             </div>
                             <div className='float-right p-4'>Sort By Relevance</div>
                         </div>
-                        <MealsGridSection meals={data.meals} />
+                        <div className='col-span-2 md:col-span-3'>
+                            <MealsGridSection meals={data.meals} />
+                        </div>
                     </div>
                 )
             }

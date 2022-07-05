@@ -7,7 +7,7 @@ import DefaultLayout from '../../components/page-templates/DefaultLayout'
 
 const Border = () => <div className='border-b-[1px] w-full border-gray-500 p-3 mb-6'></div>
 
-const FeedmeApp = () => {
+const OrganiseMyMealsApp = () => {
 
 	const welcomeMessage = "Suggested Weekly Meals"
 
@@ -25,4 +25,4 @@ const FeedmeApp = () => {
 	)
 }
 
-export default FeedmeApp
+export default OrganiseMyMealsApp

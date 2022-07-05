@@ -12,13 +12,13 @@ const AboutPage = props => {
                     <H3 text='Sick of planning meals for the week?' />
                     <div className='flex flex-col gap-4 mt-2'>
                         <p>
-                            Feedme <b>simplifies</b> the weekly meal deciding process. It is a food ideas service that suggests meals based on factors that <b>you decide</b>.
+                            OrganiseMyMeals <b>simplifies</b> the weekly meal deciding process. It is a food ideas service that suggests meals based on factors that <b>you decide</b>.
                         </p>
                         <p>
                             Do you know that <b>you want to eat something healthy on Monday, but dont know what</b>? No worries, just tell us you want something healthy, and we'll do the rest.
                         </p>
                         <p>
-                            Feedme <b>removes</b> the <b>stress</b> of meal planning and frees up time
+                            OrganiseMyMeals <b>removes</b> the <b>stress</b> of meal planning and frees up time
                         </p>
                     </div>
                 </div>

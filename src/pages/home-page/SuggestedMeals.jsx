@@ -12,7 +12,7 @@ const SuggestedMeals = () => (
         {({ loading, error, data }) => {
             if (loading) return <LoadingMessage />
 
-            if (error) return <ErrorMessage errorMessage={error} />
+            if (error) return <ErrorMessage errorMessage={"Couldnt fetch data. Something went wrong, try again later."} />
 
             if (data) {
                 const { suggestedMeals } = data;
@@ -27,11 +27,11 @@ const SuggestedMeals = () => (
                         />
                     }
                 })
-                return <TableItems items={items} gap='2' />
+                return <TableItems items={items} className='md:grid-cols-2 xl:grid-cols-4' />
             }
 
             return (
-                <TableItems items={[]} columns="4" gap="2" />
+                <TableItems items={[]} className='' />
             )
         }}
     </Query>

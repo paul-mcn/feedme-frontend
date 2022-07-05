@@ -12,7 +12,7 @@ const MEALS_QUERY = gql`{
 }`
 
 const FAVOURITE_MEALS_QUERY = gql`{ 
-    favouriteMeals(id:1) {
+    favouriteMeals(id:"c38bb4c9-caa8-4e2d-b6e4-99599ce32a00") {
         id
         name
         location
@@ -23,7 +23,7 @@ const FAVOURITE_MEALS_QUERY = gql`{
 }`
 
 const SUGGESTED_MEALS_QUERY = gql`{ 
-    suggestedMeals(id:1) {
+    suggestedMeals(id:"c38bb4c9-caa8-4e2d-b6e4-99599ce32a00") {
         id
         name
         location
