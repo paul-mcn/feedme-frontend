@@ -14,7 +14,10 @@ const SignupMessage = props => {
                     </div>
                     <div className='border-black border-2 rounded-r-3xl rounded-l-md overflow-hidden bg-green-400 group'>
                         <button className='font-bold pl-3 py-2 outline-0 w-full pr-3 group-hover:pr-2 transition-all duration-300'>
-                            Submit <FontAwesomeIcon icon={faChevronRight} className='group-hover:ml-1 transition-all duration-300' />
+                            <span className='hidden md:inline-block'>Submit</span>
+                            <span className='ml-1'>
+                                <FontAwesomeIcon icon={faChevronRight} className='group-hover:ml-1 transition-all duration-300' />
+                            </span>
                         </button>
                     </div>
                 </div>
