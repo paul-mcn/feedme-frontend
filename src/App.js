@@ -5,6 +5,7 @@ import MealPage from './pages/meals-page'
 import CreateMealPage from './pages/create-meal-page'
 import AboutPage from './pages/about-page'
 import LoginPage from './pages/login-page'
+import SignUpPage from './pages/signup-page'
 import ErrorPage from './pages/error-page'
 import Footer from './components/nav/Footer'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -19,7 +20,8 @@ function App() {
           <Route path="/" element={<OrganiseMyMealsApp />} />
           <Route path="/meals" element={<MealPage />} />
           <Route path="/meals/create-meal" element={<CreateMealPage />} />
-          <Route path="/Login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

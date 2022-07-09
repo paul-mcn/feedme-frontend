@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Tooltip from '../misc/Tooltip';
 import GhostButton from '../buttons/GhostButton';
 
-const DefaultForm = ({ className, fields, onSubmit }) => {
+const DefaultForm = ({ className, fields, onSubmit, submitText }) => {
     const fieldSet = fields.map(({ label, toolTip, input }, idx) => (
         <div key={idx}>
             <div className={`flex ' + ${label ? '' : 'justify-end pr-2'} `}>
@@ -20,7 +20,7 @@ const DefaultForm = ({ className, fields, onSubmit }) => {
                 <div className='flex flex-col gap-5'>
                     {fieldSet}
                 </div>
-                <GhostButton className='mt-10 w-full' type='submit' text='Add Meal' />
+                <GhostButton className='mt-10 w-full' type='submit' text={submitText} />
             </form>
         </div>
     )
@@ -28,12 +28,17 @@ const DefaultForm = ({ className, fields, onSubmit }) => {
 
 DefaultForm.propTypes = {
     fields: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string ,
+        label: PropTypes.string,
         toolTip: PropTypes.string,
         input: PropTypes.element
     })).isRequired,
     onSubmit: PropTypes.func,
     className: PropTypes.string,
+    submitText: PropTypes.string
+}
+
+DefaultForm.defaultProps = {
+    submitText: 'Submit'
 }
 
 export default DefaultForm
