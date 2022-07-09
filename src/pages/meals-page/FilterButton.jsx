@@ -18,10 +18,11 @@ const FilterButton = ({ text, items, children }) => {
                 <FontAwesomeIcon icon={faPlus} className={openDropdown ? 'hidden' : ''} />
                 <FontAwesomeIcon icon={faMinus} className={openDropdown ? '' : 'hidden'} />
             </button>
-            <div className={`${openDropdown ? 'h-max': 'h-0'} overflow-hidden duration-100`}>
+            <div
+                className={`${openDropdown ? 'h-full' : 'h-0 py-0'} overflow-hidden px-4 py-2`}
+            >
                 {children}
             </div>
-            {/* <ListItems className={`${openDropdown ? '': 'h-0'} overflow-hidden`} items={items} /> */}
         </div>
     )
 }

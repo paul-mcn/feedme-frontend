@@ -17,13 +17,13 @@ const DefaultHeader = props => {
     return (
         <div className={`flex flex-col items-center`}>
             <div className="">
-                <Link to={"/"} className={`block duration-100 ${hasScrolled ? 'py-1' : 'py-4'}`}>
+                <Link to={"/"} className={`block duration-100 pt-4 ${hasScrolled ? 'pb-0' : 'pb-2'}`}>
                     <p className={`font-bold text-white duration-100 ${hasScrolled ? 'text-xl' : 'text-2xl'}`}>
                         Organise My Meals
                     </p>
                 </Link>
             </div>
-            <div className={`px-5 w-11/12 mx-auto duration-100 ${hasScrolled ? 'py-5' : 'py-10'}`}>
+            <div className={`px-5 w-11/12 mx-auto duration-100 ${hasScrolled ? 'pb-5 pt-0' : 'pt-5 pb-8'}`}>
                 <div className={`flex justify-between items-center`}>
                     <div className='flex gap-4'>
                         <Link to={"/"}>

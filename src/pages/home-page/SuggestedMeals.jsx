@@ -27,7 +27,7 @@ const SuggestedMeals = () => (
                         />
                     }
                 })
-                return <TableItems items={items} className='md:grid-cols-2 xl:grid-cols-4' />
+                return <TableItems items={items} className='md:grid-cols-2 xl:grid-cols-4 gap-x-10 gap-y-20 xl:gap-y-12' />
             }
 
             return (

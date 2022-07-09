@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const GhostInput = props => {
+const GhostInput = (props) => {
     return (
-        <div className='transition-colors duration-250 hover:bg-gray-200 border-2 border-black rounded-full overflow-hidden'>
+        <div
+            className={`${props.className} transition-colors h-10 duration-250 hover:bg-gray-200 border-2 border-black rounded-full overflow-hidden`}>
             <input
                 placeholder={props.placeholder}
                 value={props.value}
-                className='font-bold px-4 py-2 outline-0 w-full' 
+                className='font-bold px-4 flex leading-9 outline-0 w-full'
                 onInput={props.onInput}
                 pattern={props.pattern}
                 type={props.type}
@@ -33,7 +34,8 @@ GhostInput.propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
     step: PropTypes.number,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    className: PropTypes.string
 }
 
 export default GhostInput

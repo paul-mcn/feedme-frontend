@@ -4,18 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const NavigationButton = ({ to, text, className }) => {
-    const classNames = `${className} h-full cursor-pointer rounded-full border-2 border-black px-4 py-1 hover:bg-gray-100 transition-colors duration-300`
+    const classNames = `${className} cursor-pointer rounded-full px-4 py-1 border-2 border-black hover:opacity-70 transition-colors duration-75`
     return (
-        <a href={to} className='inline-block group h-full'>
+        <a href={to} className='block group'>
             <div className={classNames}>
-                <div className=' gap-1 items-center group-hover:mr-0 mr-1 duration-75 h-full hidden md:flex'>
+                <div className=' gap-1 items-center hidden md:flex'>
                     {text && <div className='font-bold text-lg'>{text}</div>}
                     <FontAwesomeIcon
                         icon={faChevronRight}
-                        className="group-hover:ml-1 transition-all duration-75"
+                        className="duration-[50ms] mr-1 ml-1 group-hover:mr-0 group-hover:ml-2"
                     />
                 </div>
-                <div className='flex gap-1 items-center group-hover:mr-0 mr-1 duration-75 h-full md:hidden'>
+                <div className='flex gap-1 items-center md:hidden'>
                     {text && <div className='font-bold text-lg'>{text.split(" ")[0]}</div>}
                 </div>
             </div>

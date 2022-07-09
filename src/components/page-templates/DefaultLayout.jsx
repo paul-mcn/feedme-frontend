@@ -17,5 +17,9 @@ DefaultLayout.propTypes = {
     welcomeMessage: PropTypes.string
 }
 
+DefaultLayout.defaultProps = {
+    welcomeMessage: ''
+}
+
 
 export default DefaultLayout

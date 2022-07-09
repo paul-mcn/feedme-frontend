@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const WelcomeMessage = ({ message }) => {
+const WelcomeMessage = ({ message }) => {
     return (
         <div>
-            <h1 className='font-bold text-2xl'>{message}</h1> 
+            <h1 className='font-bold text-2xl'>{message}</h1>
         </div>
     )
 };
 
 WelcomeMessage.propTypes = {
-    message: PropTypes.string
+    message: PropTypes.string.isRequired
 }
 
 export default WelcomeMessage;

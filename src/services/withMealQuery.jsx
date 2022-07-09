@@ -33,4 +33,11 @@ const SUGGESTED_MEALS_QUERY = gql`{
     }
 }`
 
-export { MEALS_QUERY, FAVOURITE_MEALS_QUERY, SUGGESTED_MEALS_QUERY }
+const MEAL_TAGS_QUERY = gql`{
+    mealtags {
+        id
+        name
+    }
+}`
+
+export { MEALS_QUERY, FAVOURITE_MEALS_QUERY, SUGGESTED_MEALS_QUERY, MEAL_TAGS_QUERY }

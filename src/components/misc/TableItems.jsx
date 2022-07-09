@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const TableItems = props => {
 
     return (
-        <div className={`grid gap-4 ${props.className}`} >
+        <div className={`grid ${props.className}`} >
             {props.items.map(({key, item}) => <div key={key}>{item}</div>)}
         </div>
     )

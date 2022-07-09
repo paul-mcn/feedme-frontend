@@ -10,7 +10,7 @@ const SuggestedMeal = props => {
                 <h3 className='text-sm'>{props.meal.name} <span>●</span> {props.meal.location}</h3>
                 <h3><StarsInput count={props.meal.rating} /></h3>
                 <p className='text-sm h-10'>{props.meal.description}</p>
-                <div className='w-full rounded-xl h-40' style={{ background: `url(${props.meal.photoUrl}) center/cover no-repeat` }}></div>
+                <div className='w-full rounded-xl h-48 lg:h-60 xl:h-48' style={{ background: `url(${props.meal.photoUrl}) center/cover no-repeat` }}></div>
             </div>
         </div>
     )

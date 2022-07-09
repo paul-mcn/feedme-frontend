@@ -34,11 +34,12 @@ const MealSelectionTable = () => {
             </div>
             <div className='flex gap-3 items-center'>
                 <GhostInput
+                    className='h-10'
                     onInput={handleSetSearchTerm}
                     placeholder='Search'
                 />
-                <NavigationButton to='/meals/create-meal' text='Add Meal' />
-                <NavigationButton to='/meals/delete-meal' text='Delete Meal' />
+                <NavigationButton to='/meals/create-meal' className='h-10' text='Add Meal' />
+                <NavigationButton to='/meals/delete-meal' className='md:w-40 h-10' text='Delete Meal' />
             </div>
             {toggleAddMeal ? <AddMealWindow /> : null}
             {toggleRemoveMeal ? <RemoveMealWindow /> : null}

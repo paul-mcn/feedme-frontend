@@ -1,6 +1,6 @@
 export const quickLinks = [
     {
-        text: "Home", to: "/home"
+        text: "Home", to: "/"
     }, {
         text: "About", to: "/about"
     }, {

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-const FilterRadioInput = (props) => {
+const FilterCheckboxInput = props => {
     const inputs = props.items.map(({ key, item }, idx) => {
         return (
             <div key={idx} className='flex gap-1 cursor-pointer select-none'>
-                <input type='radio' id={key} value={item} name={props.inputGroupName} />
+                <input type='checkbox' id={key} value={item} name={props.inputGroupName} />
                 <label htmlFor={key}>{item}</label>
             </div>
         )
@@ -18,17 +18,11 @@ const FilterRadioInput = (props) => {
     )
 }
 
-FilterRadioInput.propTypes = {
+FilterCheckboxInput.propTypes = {
     items: PropTypes.arrayOf(PropTypes.shape({
         key: PropTypes.string,
         item: PropTypes.any
-    })),
-    inputGroupName: PropTypes.string,
-    value: PropTypes.string
+    }))
 }
 
-FilterRadioInput.defaultProps = {
-    inputGroupName: 'group'
-}
-
-export default FilterRadioInput;
+export default FilterCheckboxInput
