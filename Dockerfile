@@ -1,8 +1,5 @@
 FROM node:16
 
-# env variables
-ARG PORT=5000
-
 # Create app directory
 WORKDIR /usr/src/app/frontend
 
