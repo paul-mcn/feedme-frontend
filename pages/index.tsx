@@ -4,6 +4,11 @@ import Layout from "components/Layout";
 import styles from "styles/Home.module.css";
 import { CTAButton } from "components/common/Button";
 import SupportingImage from "components/LandingPage/SupportingImage";
+import Headline from "components/LandingPage/Headline";
+import SubHeadline from "components/LandingPage/SubHeadline";
+import Section from "components/common/Section";
+import BenefitsSection from "components/LandingPage/BenefitsSection";
+import SecondaryCTASection from "components/LandingPage/SecondaryCTASection";
 
 const Home: NextPage = () => {
   return (
@@ -16,22 +21,25 @@ const Home: NextPage = () => {
         layout="none"
         header="plain"
         headerClassName="text-black"
-        className="bg-white"
+        className="bg-white text-black"
       >
-        <div className="flex flex-row mx-auto my-10 gap-10">
-          <SupportingImage />
-          <div className="flex flex-col gap-5 my-auto">
-            <h1 className="text-black font-bold text-7xl">
-              Simplify meal planning
-            </h1>
-            <p className="text-black w-1/2 ml-2">
-              Discover an easier way to plan your meals and save time by having
-              all your recipes in the one place. Choose from a wide range of
-              meals or create your own.
-            </p>
-            <CTAButton />
+        <Section>
+          <div className="flex flex-row mx-auto mt-10 gap-10">
+            <SupportingImage />
+            <div className="flex flex-col gap-5 my-auto">
+              <Headline />
+              <SubHeadline />
+              <CTAButton label="Get Preppin" />
+            </div>
           </div>
-        </div>
+        </Section>
+        <BenefitsSection />
+        {/* Social proof */}
+        <SecondaryCTASection />
+        {/* Features */}
+        {/* Resources */}
+        {/* Success Indicators */}
+        {/* Add join now button */}
       </Layout>
     </div>
   );

@@ -18,7 +18,7 @@ const Footer = () => {
     ],
   ];
 
-  const LinkCol = ({ linkCol }: { linkCol: typeof linkCols[0] }) => {
+const LinkCol = ({ linkCol }: { linkCol: typeof linkCols[0] }) => {
     const items = linkCol.map(({ link, title }) => (
       <Link href={link} key={link}>
         {title}

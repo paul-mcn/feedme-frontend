@@ -18,7 +18,6 @@ const Header = ({ header = "default", className }: Props) => {
     return link === router.pathname;
   };
 
-
   const underlineStyle = { width: "100%" };
   const LinkButton = ({ link, title }: { link: string; title: string }) => (
     <Link href={link} key={link}>
