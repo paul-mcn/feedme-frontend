@@ -1,7 +1,0 @@
-.filter-border-rows > * {
-    border-bottom: 1px black solid;
-}
-
-.filter-border-rows > *:nth-child(1) {
-    border-top: 1px black solid;
-}
