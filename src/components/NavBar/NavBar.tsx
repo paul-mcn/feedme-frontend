@@ -11,8 +11,8 @@ const NavBar = () => {
   ];
 
   const authLinks = [
-    { name: "Login", href: "/login" },
-    { name: "Register", href: "/register" },
+    { name: "Login", href: "/auth/login" },
+    { name: "Register", href: "/auth/register" },
   ];
 
   return (
