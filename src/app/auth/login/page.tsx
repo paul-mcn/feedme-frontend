@@ -6,7 +6,9 @@ import { Form, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { setCookie } from "cookies-next";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { userFullName } from "@/state/user";
 
 const schema = yup
 	.object({
@@ -23,13 +25,18 @@ export default function LoginPage() {
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
-	const router = useRouter()
+	const router = useRouter();
+	const [fullName, setFullName] = useAtom(userFullName)
 
 	const onSuccess = async ({ response }: { response: Response }) => {
 		const token = await response.json();
 		setCookie("token", JSON.stringify(token));
-		router.push("/")
+		setFullName("Porl")
+		// get user data from token
+		// setUser(token)
+		router.push("/");
 	};
+
 
 	return (
 		<div className="max-w-md mx-auto">
