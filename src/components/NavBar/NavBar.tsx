@@ -1,13 +1,13 @@
 "use client";
-import { userFullName } from "@/state/user";
-import { useAtomValue } from "jotai";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AccountDropdown from "./AccountDropdown";
+import useUser from "@/hooks/user";
 
 const NavBar = () => {
 	const router = usePathname();
-	const fullName = useAtomValue(userFullName)
+	const { user } = useUser()
+
 
 	const links = [
 		{ name: "Home", href: "/" },
@@ -33,7 +33,7 @@ const NavBar = () => {
 					))}
 				</ul>
 				<ul className="flex flex-row items-center text-gray-900 gap-4 h-full">
-					{fullName?.length > 0
+					{user?.username?.length > 0
 						? <AccountDropdown />
 						: authLinks.map((link) => (
 							<li
