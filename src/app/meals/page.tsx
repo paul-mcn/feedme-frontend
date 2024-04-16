@@ -1,4 +1,4 @@
-import { useGetMeals } from "@/hooks/meals";
+import useGetMeals from "@/hooks/meals";
 import {
   dehydrate,
   HydrationBoundary,
@@ -7,18 +7,21 @@ import {
 import Meals from "./meals";
 
 export default async function MealsPage() {
-  // const meals = useGetMeals();
+	// TODO implement prefetching query
+  // const queryClient = new QueryClient();
 
-  const queryClient = new QueryClient();
+  // await queryClient.prefetchQuery({
+  // 	queryKey: ["meals"],
+  // 	queryFn: () => fetch("/api/meals").then((res) => res.json()),
+  // });
 
-  await queryClient.prefetchQuery({
-    queryKey: ["meals"],
-    queryFn: () => fetch("/api/meals").then((res) => res.json()),
-  });
+  // console.log(meals)
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    // <HydrationBoundary state={dehydrate(queryClient)}>
+    <div className="">
       <Meals />
-    </HydrationBoundary>
+    </div>
+    // </HydrationBoundary>
   );
 }
