@@ -19,7 +19,7 @@ export default function Meals() {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {[...meals, ...meals, ...meals].map((meal: Meal) => (
+      {meals.map((meal: Meal) => (
         <div key={meal.id} className="group cursor-pointer">
           <div className="relative">
             <Image
