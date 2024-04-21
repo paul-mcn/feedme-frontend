@@ -1,5 +1,7 @@
 "use client";
 import useGetMeals, { Meal } from "@/hooks/meals";
+import { ArrowRightIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 
 export default function Meals() {
   const { meals, isLoading } = useGetMeals();
@@ -16,11 +18,29 @@ export default function Meals() {
   }
 
   return (
-    <div>
-      {meals.map((meal: Meal) => (
-        <div key={meal.id} className="border">
-          <div>{meal.name}</div>
-					<div>${meal.price}</div>
+    <div className="grid grid-cols-4 gap-4">
+      {[...meals, ...meals, ...meals].map((meal: Meal) => (
+        <div key={meal.id} className="group cursor-pointer">
+          <div className="relative">
+            <Image
+              src={meal.imageURL}
+              className="rounded-lg"
+              alt={meal.name}
+              width={200}
+              height={200}
+            />
+            <div className="bg-white rounded-full w-16 absolute bottom-1 right-2 text-sm py-1 px-2 group-hover:block hidden">
+              <div className="flex justify-between items-center">
+                View
+                <ChevronRightIcon className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+          <div className="text-sm">
+            <div className="font-bold mt-2">{meal.name}</div>
+            <div className="truncate">{meal.description}</div>
+            <div>${meal.price}</div>
+          </div>
         </div>
       ))}
     </div>

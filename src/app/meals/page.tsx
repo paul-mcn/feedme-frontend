@@ -19,7 +19,7 @@ export default async function MealsPage() {
 
   return (
     // <HydrationBoundary state={dehydrate(queryClient)}>
-    <div className="">
+    <div className="py-16">
       <Meals />
     </div>
     // </HydrationBoundary>

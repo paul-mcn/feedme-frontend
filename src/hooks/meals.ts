@@ -4,6 +4,9 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 export type Meal = {
   id: string;
   name: string;
+	ingredients: string[];
+	description: string;
+	imageURL: string;
   price: number;
 };
 
