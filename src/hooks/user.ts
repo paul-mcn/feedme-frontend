@@ -21,7 +21,6 @@ const useUser = () => {
   };
 
   const isAuthenticated = () => {
-		console.log(query.data)
     if (!query.data) return false;
     const keys = Object.keys(query.data);
     if (keys.length === 1 && keys[0] === "detail") return false;
