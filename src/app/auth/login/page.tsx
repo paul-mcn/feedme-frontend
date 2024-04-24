@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/fields/Input";
 import H1 from "@/components/headings/H1";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -40,9 +40,14 @@ export default function LoginPage() {
   const [serverErrorMessage, setServerErrorMessage] = useState("");
   const { refetchUser, isAuthenticated } = useUser();
 
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
+
   const onSuccess = async () => {
     await refetchUser();
-    isAuthenticated() && router.push("/");
   };
 
   const onError: onErrorParams = (payload) => {

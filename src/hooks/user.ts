@@ -31,6 +31,7 @@ const useUser = () => {
     user: getUser(),
     refetchUser: query.refetch,
     isAuthenticated,
+		isLoadingUser: query.isLoading,
   };
 };
 
