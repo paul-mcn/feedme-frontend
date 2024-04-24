@@ -6,7 +6,7 @@ import useUser from "@/hooks/user";
 
 const NavBar = () => {
 	const router = usePathname();
-	const { user } = useUser()
+	const { isAuthenticated } = useUser()
 
 
 	const links = [
@@ -33,7 +33,7 @@ const NavBar = () => {
 					))}
 				</ul>
 				<ul className="flex flex-row items-center text-gray-900 gap-4 h-full">
-					{user?.username?.length > 0
+					{isAuthenticated()
 						? <AccountDropdown />
 						: authLinks.map((link) => (
 							<li
