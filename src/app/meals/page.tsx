@@ -5,9 +5,10 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Meals from "./meals";
+import LinkButton from "@/components/buttons/Link";
 
 export default async function MealsPage() {
-	// TODO implement prefetching query
+  // TODO implement prefetching query
   // const queryClient = new QueryClient();
 
   // await queryClient.prefetchQuery({
@@ -19,7 +20,10 @@ export default async function MealsPage() {
 
   return (
     // <HydrationBoundary state={dehydrate(queryClient)}>
-    <div className="py-16">
+    <div>
+      <LinkButton href="/meals/add" className="mb-4">
+        Add Meal
+      </LinkButton>
       <Meals />
     </div>
     // </HydrationBoundary>
