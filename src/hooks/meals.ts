@@ -1,12 +1,23 @@
 "use client";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+
+export type Ingredient = {
+	unit: string;
+	value: string;
+	title: string;
+}
+
+export type IngredientGroup = {
+	groupName: string;
+	groupValues: Ingredient[];
+}
 
 export type Meal = {
   id: string;
-  name: string;
-	ingredients: string[];
+  title: string;
+	ingredients: IngredientGroup[];
 	description: string;
-	imageURL: string;
+	imageUrl: string;
   price: number;
 };
 

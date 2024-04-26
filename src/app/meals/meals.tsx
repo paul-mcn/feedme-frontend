@@ -23,11 +23,12 @@ export default function Meals() {
         <div key={meal.id} className="group cursor-pointer">
           <div className="relative">
             <Image
-              src={meal.imageURL}
+              src={meal.imageUrl}
               className="rounded-lg"
-              alt={meal.name}
+              alt={meal.title}
               width={200}
               height={200}
+              priority
             />
             <div className="bg-white rounded-full w-16 absolute bottom-1 right-2 text-sm py-1 px-2 group-hover:block hidden">
               <div className="flex justify-between items-center">
@@ -37,7 +38,7 @@ export default function Meals() {
             </div>
           </div>
           <div className="text-sm">
-            <div className="font-bold mt-2">{meal.name}</div>
+            <div className="font-bold mt-2">{meal.title}</div>
             <div className="truncate">{meal.description}</div>
             <div>${meal.price}</div>
           </div>
