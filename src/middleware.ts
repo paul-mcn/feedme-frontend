@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const tokenString = request.cookies.get("token");
   const token: Token = JSON.parse(tokenString?.value || "{}");
   const url = new URL(request.url);
-	
+
   if (url.pathname === "/auth/login" && token.access_token) {
     return NextResponse.redirect(url.origin);
   }
@@ -25,5 +25,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/auth/login", "/api/users/me/meals"],
+  matcher: ["/auth/login", "/api/users/me/:path*", "/api/file/image-upload"],
 };
