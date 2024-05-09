@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <NavBar />
           <div className="bg-gray-100 min-h-screen">
-            <div className="w-4/5 mx-auto">{children}</div>
+            <div className="w-10/12 md:w-4/5 mx-auto">{children}</div>
           </div>
         </Providers>
       </body>
