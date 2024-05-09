@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import useUser from "@/hooks/user";
 
-type onErrorParams = ({
+export type onErrorParams = ({
   response,
   error,
 }:
@@ -62,7 +62,7 @@ export default function LoginPage() {
     }
 
     if (payload.response?.status === 401) {
-      setServerErrorMessage("Incorrect username or password");
+      setServerErrorMessage("Incorrect email or password");
     }
   };
 
@@ -78,7 +78,7 @@ export default function LoginPage() {
         className="flex flex-col gap-4 p-8 bg-white rounded-xl mt-4"
       >
         <div className="flex flex-col gap-1">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Email</label>
           <Input
             {...register("username")}
             type="text"
