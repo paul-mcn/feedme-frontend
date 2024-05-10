@@ -46,7 +46,7 @@ export default function LoginPage() {
     if (isAuthenticated()) {
       router.push("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, router]);
 
   const onSuccess = async () => {
     await refetchUser();

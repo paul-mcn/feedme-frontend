@@ -65,6 +65,7 @@ export function ImageInput(props: ImageInputProps) {
                     src={image["data_url"]}
                     width="112"
                     className="rounded-md"
+										alt="uploaded image"
                   />
                   <button
                     className="text-white bg-black absolute top-1 right-1 px-2 py-1 ml-auto hover:bg-gray-800 text-xs rounded-md truncate"
