@@ -26,7 +26,6 @@ type Action =
     };
 
 type onSubmitParams = Pick<FormProps<any>, "onSubmit">;
-type onSuccessParams = Pick<FormProps<any>, "onSuccess">;
 type onErrorParams = Pick<FormProps<any>, "onError">;
 
 type State = {
@@ -84,7 +83,6 @@ export default function AddMealPage() {
       return;
     }
     const image = state.images[0];
-    console.log(state.images);
     if (!image?.file) {
       return;
     }
@@ -102,9 +100,6 @@ export default function AddMealPage() {
     if (response?.ok) {
 			router.push("/meals");
     }
-  };
-  const onSuccess: onSuccessParams["onSuccess"] = async ({ response }) => {
-    console.log(await response.json());
   };
   const onError: onErrorParams["onError"] = ({ response, error }) => {
     setError("root.internal", {
@@ -139,7 +134,6 @@ export default function AddMealPage() {
       const title = formattedTitle
         ? formattedTitle?.[0].toUpperCase() + formattedTitle?.slice(1)
         : "";
-      console.log({ title });
       return title;
     } catch (error) {
       console.log(error);
@@ -193,7 +187,6 @@ export default function AddMealPage() {
       <Form
         control={control}
         onSubmit={onSubmit}
-        onSuccess={onSuccess}
         onError={onError}
         className="flex flex-col gap-4 p-8 bg-white rounded-xl mt-4 max-w-xl"
       >
