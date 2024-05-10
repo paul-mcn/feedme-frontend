@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import useUser from "@/hooks/user";
+import Loading from "@/components/loading/Loading";
+import { twMerge } from "tailwind-merge";
 
 export type onErrorParams = ({
   response,
@@ -32,7 +34,7 @@ export default function LoginPage() {
   const {
     register,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -68,51 +70,54 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md mx-auto">
-      <H1 text="Login" />
-      <Form
-        action="/api/auth/login"
-        method="post"
-        control={control}
-        onSuccess={onSuccess}
-        onError={onError}
-        className="flex flex-col gap-4 p-8 bg-white rounded-xl mt-4"
-      >
-        <div className="flex flex-col gap-1">
-          <label htmlFor="username">Email</label>
-          <Input
-            {...register("username")}
-            type="text"
-            name="username"
-            id="username"
-          />
-          <p className="text-red-500 text-xs px-1 first-letter:capitalize">
-            {errors.username?.message}
-          </p>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="password">Password</label>
-          <Input
-            {...register("password")}
-            type="password"
-            name="password"
-            id="password"
-          />
-          <p className="text-red-500 text-xs px-1 first-letter:capitalize">
-            {errors.password?.message}
-          </p>
-        </div>
-        {serverErrorMessage.length > 0 && (
-          <p className="text-red-500 text-xs px-1 first-letter:capitalize">
-            {serverErrorMessage}
-          </p>
-        )}
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
-          type="submit"
+      {isSubmitting && <Loading />}
+      <div className={isSubmitting ? "hidden" : "block"}>
+        <H1 text="Login" />
+        <Form
+          action="/api/auth/login"
+          method="post"
+          control={control}
+          onSuccess={onSuccess}
+          onError={onError}
+          className={"flex flex-col gap-4 p-8 bg-white rounded-xl mt-4"}
         >
-          Login
-        </button>
-      </Form>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="username">Email</label>
+            <Input
+              {...register("username")}
+              type="text"
+              name="username"
+              id="username"
+            />
+            <p className="text-red-500 text-xs px-1 first-letter:capitalize">
+              {errors.username?.message}
+            </p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="password">Password</label>
+            <Input
+              {...register("password")}
+              type="password"
+              name="password"
+              id="password"
+            />
+            <p className="text-red-500 text-xs px-1 first-letter:capitalize">
+              {errors.password?.message}
+            </p>
+          </div>
+          {serverErrorMessage.length > 0 && (
+            <p className="text-red-500 text-xs px-1 first-letter:capitalize">
+              {serverErrorMessage}
+            </p>
+          )}
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
+            type="submit"
+          >
+            Login
+          </button>
+        </Form>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,12 @@
 "use client";
 import { Meal, useGetMeals } from "@/hooks/meals";
 import MealCard from "./mealCard";
+import Loading from "@/components/loading/Loading";
 
 export default function Meals() {
   const { meals, isLoading } = useGetMeals();
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (!Array.isArray(meals)) {
