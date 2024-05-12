@@ -52,12 +52,13 @@ export default function LoginPage() {
     await refetchUser();
   };
 
-  const onError: onErrorParams = (payload) => {
+  const onError: onErrorParams = async (payload) => {
     if (!payload.response?.status) {
       return setServerErrorMessage("Something went wrong. Please try again.");
     }
 
     if (payload.response?.status >= 500) {
+		console.log(await payload.response.text())
       setServerErrorMessage(
         "We're sorry, but our system is currently undergoing maintenance. Please try logging in or registering again in a few moments.",
       );

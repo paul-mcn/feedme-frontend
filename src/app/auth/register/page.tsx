@@ -28,6 +28,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const onSuccess = async ({ response }: { response: Response }) => {
+    console.log(response, "success");
     const token = await response.json();
     setCookie("token", JSON.stringify(token));
     router.push("/");
@@ -35,9 +36,14 @@ export default function RegisterPage() {
 
   const onError: onErrorParams = async ({ response }) => {
     if (response) {
-      const res = await response.json();
-      setError("root.error", {
-        message: res.detail,
+      const isJson = response.headers
+        .get("content-type")
+        ?.includes("application/json");
+      const errorMessage = isJson
+        ? (await response.json()).detail
+        : await response.text();
+      return setError("root.error", {
+        message: errorMessage,
       });
     }
   };
@@ -72,9 +78,9 @@ export default function RegisterPage() {
             {errors.password?.message}
           </p>
         </div>
-				<p className="text-red-500 text-xs px-1 first-letter:capitalize">
-					{errors.root?.error?.message}
-				</p>
+        <p className="text-red-500 text-xs px-1 first-letter:capitalize">
+          {errors.root?.error?.message}
+        </p>
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
           type="submit"
