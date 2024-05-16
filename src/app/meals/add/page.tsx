@@ -36,7 +36,7 @@ type State = {
 
 const schema = yup
   .object({
-    url: yup.string().url().required(),
+    snapshotURL: yup.string().url().required(),
     title: yup.string().required(),
     ingredients: yup.string(),
     description: yup.string(),
@@ -192,22 +192,22 @@ export default function AddMealPage() {
   };
 
   const handleClickNext = async () => {
-    const isValid = await trigger("url");
+    const isValid = await trigger("snapshotURL");
     if (!isValid) {
       // add http if string doesnt contain it to pass validation
-      const urlString = getValues("url");
+      const urlString = getValues("snapshotURL");
       const urlWithHttp = addHttps(urlString);
-      setValue("url", urlWithHttp, {
+      setValue("snapshotURL", urlWithHttp, {
         shouldValidate: true,
         shouldDirty: true,
       });
-      const isValidAfterHttps = await trigger("url");
+      const isValidAfterHttps = await trigger("snapshotURL");
       if (!isValidAfterHttps) {
         return;
       }
     }
 
-    const url = getValues("url");
+    const url = getValues("snapshotURL");
 
     addMealSnapshot(url);
     dispatch({ type: "INCREMENT_STEP" });
@@ -228,19 +228,19 @@ export default function AddMealPage() {
             URL
           </label>
           <Input
-            {...register("url")}
+            {...register("snapshotURL")}
             type="url"
-            id="url"
+            id="snapshotURL"
             readOnly={state.step !== minStep}
             className="read-only:text-gray-500 read-only:border-none read-only:focus-visible:outline-0"
             placeholder="https://example.com/my-recipe-1"
           />
           <p className="text-red-500 text-xs px-1 first-letter:capitalize">
-            {errors.url?.message}
+            {errors.snapshotURL?.message}
           </p>
         </div>
         <div className="flex flex-col gap-1" style={getStyle(2)}>
-          {errors.url?.message}
+          {errors.snapshotURL?.message}
           <label className="font-bold w-min" htmlFor="title">
             Title
           </label>
@@ -328,7 +328,7 @@ export default function AddMealPage() {
             type="button"
             label="Next"
             onClick={handleClickNext}
-            disabled={getValues("url")?.length == 0}
+            disabled={getValues("snapshotURL")?.length == 0}
           />
           <Button
             className={`bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 ${state.step != maxStep && "hidden"}`}

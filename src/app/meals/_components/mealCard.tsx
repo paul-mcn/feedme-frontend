@@ -9,17 +9,18 @@ type MealCardProps = {
 
 export default function mealCard(props: MealCardProps) {
   return (
-    <div key={props.meal.id} className="group cursor-pointer">
+    <div key={props.meal.id} className="group cursor-pointer h-full w-40">
       <div className="relative">
-        <Image
-          src={props.meal.imageURLs[0].id}
-          className="rounded-lg"
-          alt={props.meal.title}
-          width={200}
-          height={200}
-          priority
-        />
-        <div className="bg-white rounded-full w-16 absolute bottom-1 right-2 text-sm py-1 px-2 group-hover:block hidden">
+        <div className="h-40 object-cover overflow-hidden rounded-lg">
+          <Image
+            src={props.meal.imageURLs[0].id}
+            alt={props.meal.title}
+            width={200}
+            height={200}
+            priority
+          />
+        </div>
+        <div className="bg-white rounded-full w-16 absolute bottom-1 right-1 text-sm py-1 px-2 group-hover:block hidden">
           <div className="flex justify-between items-center">
             View
             <ChevronRightIcon className="w-4 h-4" />
