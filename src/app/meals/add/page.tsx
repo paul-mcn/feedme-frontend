@@ -1,6 +1,6 @@
 "use client";
 import H1 from "@/components/headings/H1";
-import React, { CSSProperties, useCallback, useMemo, useReducer } from "react";
+import React, { CSSProperties, useEffect, useReducer } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Form, FormProps, useForm } from "react-hook-form";
@@ -10,10 +10,11 @@ import Button from "@/components/buttons/Button";
 import { ImageInput } from "@/components/fields/ImageInput";
 import clsx from "clsx";
 import { ImageListType } from "react-images-uploading";
-import { MealCreate, useAddMeal } from "@/hooks/meals";
+import { MealCreate, useAddMeal, useUpsertMealSnapshot } from "@/hooks/meals";
 import { PlusSmallIcon } from "@heroicons/react/20/solid";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import ingredientsListToString from "@/util/ingredientsListToString";
 
 type Action =
   | {
@@ -70,7 +71,13 @@ const reducer = (state: State, action: Action) => {
 export default function AddMealPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { addMeal, isLoading } = useAddMeal();
-	const router = useRouter()
+  const {
+    addMealSnapshot,
+    snapshotData,
+    isLoading: isSnapshotLoading,
+  } = useUpsertMealSnapshot();
+  const router = useRouter();
+
   const onSubmit: onSubmitParams["onSubmit"] = async ({ event }) => {
     if (!event) {
       return;
@@ -98,7 +105,7 @@ export default function AddMealPage() {
     const response = await addMeal(meal, images as File[]);
 
     if (response?.ok) {
-			router.push("/meals");
+      router.push("/meals");
     }
   };
   const onError: onErrorParams["onError"] = ({ response, error }) => {
@@ -117,6 +124,27 @@ export default function AddMealPage() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    if (snapshotData) {
+      (async () => {
+        const data = await snapshotData.json();
+        console.log(data);
+        if (data.meal) {
+          const meal = data.meal;
+          setValue("title", meal.title);
+          const ingredients =
+            typeof meal.ingredients === "string"
+              ? meal.ingredients
+              : ingredientsListToString(meal.ingredients);
+          setValue("ingredients", ingredients);
+          setValue("description", meal.description);
+          setValue("price", meal.price);
+          setValue("time", meal.time);
+        }
+      })();
+    }
+  }, [snapshotData]);
 
   const addHttps = (url: string) => {
     if (!url.match(/^http?:\/\//i) || !url.match(/^https?:\/\//i)) {
@@ -166,6 +194,7 @@ export default function AddMealPage() {
   const handleClickNext = async () => {
     const isValid = await trigger("url");
     if (!isValid) {
+      // add http if string doesnt contain it to pass validation
       const urlString = getValues("url");
       const urlWithHttp = addHttps(urlString);
       setValue("url", urlWithHttp, {
@@ -177,8 +206,12 @@ export default function AddMealPage() {
         return;
       }
     }
+
+    const url = getValues("url");
+
+    addMealSnapshot(url);
     dispatch({ type: "INCREMENT_STEP" });
-    updateTitleFromUrl(getValues("url"));
+    updateTitleFromUrl(url);
   };
 
   return (
@@ -304,7 +337,11 @@ export default function AddMealPage() {
               <div className="flex items-center">
                 <div>Add</div>
                 <div>
-                  {isLoading ? <ArrowPathIcon className="w-7 h-7 animate-spin" /> : <PlusSmallIcon className="w-7 h-7" />}
+                  {isLoading ? (
+                    <ArrowPathIcon className="w-7 h-7 animate-spin" />
+                  ) : (
+                    <PlusSmallIcon className="w-7 h-7" />
+                  )}
                 </div>
               </div>
             }

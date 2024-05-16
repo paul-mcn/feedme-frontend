@@ -24,6 +24,7 @@ export type Meal = {
   imageURLs: imageURLs[];
   price: number;
   time: number;
+  snapshotURL?: string;
 };
 
 export type MealCreate = {
@@ -33,6 +34,7 @@ export type MealCreate = {
   price: number;
   time: number;
   imageURLs?: imageURLs[];
+  snapshotURL?: string;
 };
 
 type Fields = {
@@ -76,8 +78,31 @@ export const useGetMeals = () => {
   };
 };
 
+export const useUpsertMealSnapshot = () => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (url: string) => {
+      return fetch("/api/users/me/meals/snapshot", {
+        method: "POST",
+        body: JSON.stringify({ url }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+    },
+  });
+  return {
+    addMealSnapshot: mutation.mutate,
+    isLoading: mutation.isPending,
+    snapshotData: mutation.data,
+  };
+};
+
 export const useAddMeal = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const addMealMutation = useMutation({
     mutationFn: (meal: MealCreate) => {
       return fetch("/api/users/me/meals/add", {
@@ -89,8 +114,7 @@ export const useAddMeal = () => {
       });
     },
     onSuccess: () => {
-      // Invalidate and refetch
-      // queryClient.invalidateQueries({ queryKey: [queryKey] });
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
     },
   });
 

@@ -28,7 +28,6 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const onSuccess = async ({ response }: { response: Response }) => {
-    console.log(response, "success");
     const token = await response.json();
     setCookie("token", JSON.stringify(token));
     router.push("/");
