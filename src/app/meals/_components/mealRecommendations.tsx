@@ -19,7 +19,7 @@ export default function MealRecommendations() {
   return (
     <div className="flex flex-col gap-6">
       <div className="font-bold text-lg">
-        {"G'day! Here are your weekly meals"}
+        {"G'day! Here are the meals for this week"}
       </div>
       <div className="grid grid-cols-7 gap-4">
         {mealRecommendations.map(({ meal, date }) => (
