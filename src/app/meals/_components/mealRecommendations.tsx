@@ -25,7 +25,7 @@ export default function MealRecommendations() {
       <div className="grid grid-cols-4 gap-x-4 gap-y-8">
         {mealRecommendations.map(({ meal, date }) => (
           <div className="flex flex-col gap-2" key={meal.id}>
-            <div className="text-sm font-bold">{formatDate(date, "iii")}</div>
+            <div className="text-sm font-bold">{formatDate(new Date(date), "iii")}</div>
             {meal.snapshotURL ? (
               <Link href={meal.snapshotURL}>
                 <MealCard meal={meal} />
