@@ -15,13 +15,16 @@ export async function POST(req: NextRequest) {
     }
 
     const token = await tokenPayload.json();
-    console.log("parsed token", token);
+
+    const maxAge = process.env.REFRESH_TOKEN_MAX_AGE
+      ? parseInt(process.env.REFRESH_TOKEN_MAX_AGE)
+      : 60 * 60 * 24 * 30;
 
     // Below is an example of saving information to a cookie
     const cookie = serialize("token", JSON.stringify(token), {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60, // 60 minutes
+      maxAge: maxAge,
       path: "/",
     });
 
@@ -32,7 +35,6 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.log(error);
     return new NextResponse("Something went wrong. Please try again.", {
       status: 500,
     });
