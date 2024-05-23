@@ -1,7 +1,12 @@
 import { twMerge } from "tailwind-merge";
 import styles from "./Loading.module.css";
 
-export default function Loading({ className }: { className?: string }) {
+type LoadingProps = {
+  className?: string;
+  message?: string;
+};
+
+export default function Loading({ className, message }: LoadingProps) {
   return (
     <div className={twMerge("relative h-96", className)}>
       <div className="absolute flex gap-2 items-center justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -18,6 +23,7 @@ export default function Loading({ className }: { className?: string }) {
           style={{ animationDelay: "0.3s" }}
         ></div>
       </div>
+      <div className="text-center font-bold">{message}</div>
     </div>
   );
 }
