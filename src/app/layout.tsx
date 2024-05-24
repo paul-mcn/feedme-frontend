@@ -6,10 +6,18 @@ import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const title = "Organise My Meals";
+const description =
+  "Discover delicious meal recommendations with our app! Whether you're looking for easy dinner recipes, quick healthy meals, or vegetarian and vegan options, we’ve got you covered. Explore low-carb meal plans, family-friendly dinners, budget-friendly meals, and gluten-free ideas. From Mediterranean diet recipes to keto dinners and high-protein meals, our app offers simple lunch ideas, comfort food recipes, and convenient one-pot meals. Start planning your perfect meal today!";
+
 export const metadata: Metadata = {
-  title: "Organise My Meals",
-  description:
-    "Organise My Meals: Simplify Meal Planning | Personalized Menus, Smart Shopping Lists & Nutrition-Focused Recipes | Start Organizing Your Culinary Journey Now!",
+  title,
+  description,
+  openGraph: {
+    description,
+    title,
+    url: "https://organisemymeals.com/",
+  },
 };
 
 export default function RootLayout({
