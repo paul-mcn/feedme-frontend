@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AccountDropdown from "./AccountDropdown";
-import useUser from "@/hooks/user";
+import { useUser } from "@/hooks/user";
 
 const NavBar = () => {
 	const router = usePathname();

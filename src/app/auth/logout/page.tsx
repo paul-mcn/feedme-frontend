@@ -1,6 +1,6 @@
 "use client";
 import Loading from "@/components/loading/Loading";
-import useUser from "@/hooks/user";
+import { useUser } from "@/hooks/user";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";

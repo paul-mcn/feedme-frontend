@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { onErrorParams } from "../login/page";
+import { useUser } from "@/hooks/user";
 
 const schema = yup
   .object({
