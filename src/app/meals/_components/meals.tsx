@@ -18,7 +18,7 @@ export default function Meals() {
   }
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {meals.map((meal: Meal) => (
         <MealCard key={meal.id} meal={meal} />
       ))}

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex flex-col gap-4">
-      <div className="flex justify-between mt-20 items-center">
+      <div className="flex justify-between md:flex-row flex-col-reverse gap-4 mt-20 items-center">
         <div className="flex flex-col gap-5 pr-4">
           <h1 className="text-3xl font-bold">Organise My Meals</h1>
           <p className="max-w-xs">
