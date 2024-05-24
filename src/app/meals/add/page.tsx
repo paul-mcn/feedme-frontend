@@ -42,6 +42,7 @@ const schema = yup
     description: yup.string(),
     price: yup.number(),
     time: yup.number(),
+    notes: yup.string(),
   })
   .required();
 
@@ -141,6 +142,7 @@ export default function AddMealPage() {
           setValue("description", meal.description);
           setValue("price", meal.price);
           setValue("time", meal.time);
+          setValue("notes", meal.notes);
         }
       })();
     }
@@ -288,6 +290,22 @@ export default function AddMealPage() {
             id="time"
             step="0.01"
             placeholder="e.g. 30"
+          />
+          <p className="text-red-500 text-xs px-1 first-letter:capitalize">
+            {errors.price?.message}
+          </p>
+        </div>
+        <div className="flex flex-col gap-1" style={getStyle(2)}>
+          <label className="font-bold w-28" htmlFor="notes">
+            Notes
+          </label>
+          <Textarea
+            {...register("notes")}
+            type="text"
+            id="notes"
+            placeholder={
+              "50g garlic butter\n2 tbsp olive oil\n500g peeled green prawns, tails intact\n1 leek, thinly sliced"
+            }
           />
           <p className="text-red-500 text-xs px-1 first-letter:capitalize">
             {errors.price?.message}

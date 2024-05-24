@@ -1,14 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export type Token = {
   token_type: string;
   access_token: string;
 };
 
-const useUser = () => {
+export const useUser = () => {
   const query = useQuery({
     queryKey: ["user"],
-    queryFn: () => fetch("/api/users/me").then((res) => res.json()),
+    queryFn: async () => {
+      const res = await fetch("/api/users/me");
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail);
+      }
+      return res.json();
+    },
   });
 
   const getUser = () => {
@@ -31,8 +38,21 @@ const useUser = () => {
     user: getUser(),
     refetchUser: query.refetch,
     isAuthenticated,
-		isLoadingUser: query.isLoading,
+    isLoadingUser: query.isLoading,
   };
 };
 
-export default useUser;
+export const useSetupUser = () => {
+  const mutation = useMutation({
+    mutationFn: async (id) => {
+      const res = await fetch("/api/users/me/setup-account");
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.detail);
+      }
+      return res.json();
+    },
+  });
+
+  return mutation;
+};

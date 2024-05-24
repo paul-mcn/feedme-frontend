@@ -1,7 +1,7 @@
 "use client";
 import {
-  useCreateMealRecommendations,
-  useGetMealRecommendations,
+	useCreateMealRecommendations,
+	useGetMealRecommendations,
 } from "@/hooks/mealRecommendations";
 import React, { useEffect } from "react";
 import MealCard from "./mealCard";
@@ -10,81 +10,85 @@ import Loading from "@/components/loading/Loading";
 import Link from "next/link";
 
 export default function MealRecommendations() {
-  const {
-    data: recommendations,
-    isPending,
-    refetch: refetchMealRecommendations,
-  } = useGetMealRecommendations();
+	const {
+		data: recommendations,
+		isPending,
+		refetch: refetchMealRecommendations,
+	} = useGetMealRecommendations();
 
-  const {
-    createMealRecommendations,
-    isLoading: isCreatingRecommendations,
-    isSucess,
-  } = useCreateMealRecommendations();
+	const {
+		mutate: createMealRecommendations,
+		isPending: isCreatingRecommendations,
+		isSuccess,
+		error: createError,
+	} = useCreateMealRecommendations();
 
-  // Refetch recommendations if they are created
-  useEffect(() => {
-    if (isSucess) {
-      refetchMealRecommendations();
-    }
-  }, [isSucess]);
+	// Refetch recommendations if they are created
+	useEffect(() => {
+		if (isSuccess) {
+			refetchMealRecommendations();
+		}
+	}, [isSuccess]);
 
-  // Create recommendations if they don't exist
-  useEffect(() => {
-    if (
-      !isPending &&
-      !isCreatingRecommendations &&
-      !isSucess &&
-      recommendations &&
-      // no recommendations exist or are expired
-      (recommendations.mealRecommendations.length === 0 ||
-        !isFuture(recommendations?.expirationDate))
-    ) {
-      createMealRecommendations(new Date());
-    }
-  }, [
-    isPending,
-    isCreatingRecommendations,
-    isSucess,
-    recommendations,
-    createMealRecommendations,
-  ]);
+	// Create recommendations if they don't exist
+	useEffect(() => {
+		if (
+			!isPending &&
+			!isCreatingRecommendations &&
+			!isSuccess &&
+			recommendations &&
+			// dont recreate recommendations on error
+			!createError?.message &&
+			// no recommendations exist or are expired
+			(recommendations.mealRecommendations.length === 0 ||
+				!isFuture(recommendations?.expirationDate))
+		) {
+			createMealRecommendations(new Date());
+		}
+	}, [
+		isPending,
+		isCreatingRecommendations,
+		isSuccess,
+		recommendations,
+		createError,
+		createMealRecommendations,
+	]);
 
-  if (isPending) {
-    return <Loading className="h-20" />;
-  }
+	if (createError) {
+		return <div className="font-bold">{createError.message}</div>;
+	}
 
-  if (recommendations?.mealRecommendations.length === 0) {
-    const message = isCreatingRecommendations
-      ? "Creating recommendations now..."
-      : "Woah there, you don't have any recommendations yet...";
+	if (recommendations) {
+		return (
+			<div className="flex flex-col gap-6">
+				<div className="font-bold text-lg">
+					{"G'day! Here are the meals for this week"}
+				</div>
+				<div className="grid grid-cols-4 gap-x-4 gap-y-8">
+					{recommendations.mealRecommendations.map(({ meal, date }) => (
+						<div className="flex flex-col gap-2" key={meal.id}>
+							<div className="text-sm font-bold">{formatDate(date, "iii")}</div>
+							{meal.snapshotURL ? (
+								<Link href={meal.snapshotURL}>
+									<MealCard meal={meal} />
+								</Link>
+							) : (
+								<MealCard meal={meal} />
+							)}
+						</div>
+					))}
+				</div>
+			</div>
+		);
+	}
 
-    return (
-      <div>
-        <Loading message={message} />
-      </div>
-    );
-  }
+	if (isCreatingRecommendations) {
+		return (
+			<div>
+				<Loading message={"Creating recommendations..."} />
+			</div>
+		);
+	}
 
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="font-bold text-lg">
-        {"G'day! Here are the meals for this week"}
-      </div>
-      <div className="grid grid-cols-4 gap-x-4 gap-y-8">
-        {recommendations?.mealRecommendations.map(({ meal, date }) => (
-          <div className="flex flex-col gap-2" key={meal.id}>
-            <div className="text-sm font-bold">{formatDate(date, "iii")}</div>
-            {meal.snapshotURL ? (
-              <Link href={meal.snapshotURL}>
-                <MealCard meal={meal} />
-              </Link>
-            ) : (
-              <MealCard meal={meal} />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+	return <Loading className="h-20" />;
 }

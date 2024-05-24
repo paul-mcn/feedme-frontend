@@ -25,6 +25,7 @@ export type Meal = {
   price: number;
   time: number;
   snapshotURL?: string;
+  notes?: string;
 };
 
 export type MealCreate = {
@@ -35,6 +36,7 @@ export type MealCreate = {
   time: number;
   imageURLs?: imageURLs[];
   snapshotURL?: string;
+  notes?: string;
 };
 
 type Fields = {
