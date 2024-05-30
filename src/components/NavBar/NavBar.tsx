@@ -18,8 +18,6 @@ const NavBar = () => {
     { name: "Register", href: "/auth/register" },
   ];
 
-  console.log({ user });
-
   return (
     <div className="bg-white w-full h-20 sticky top-0 z-10">
       <div className="flex flex-row w-4/5 mx-auto h-full justify-between">
