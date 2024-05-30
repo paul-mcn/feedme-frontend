@@ -6,7 +6,7 @@ import { useUser } from "@/hooks/user";
 
 const NavBar = () => {
   const router = usePathname();
-  const { isAuthenticated } = useUser();
+  const { data: user } = useUser();
 
   const links = [
     { name: "Home", href: "/" },
@@ -17,6 +17,8 @@ const NavBar = () => {
     { name: "Login", href: "/auth/login" },
     { name: "Register", href: "/auth/register" },
   ];
+
+  console.log({ user });
 
   return (
     <div className="bg-white w-full h-20 sticky top-0 z-10">
@@ -32,7 +34,7 @@ const NavBar = () => {
           ))}
         </ul>
         <ul className="flex flex-row items-center text-gray-900 gap-4 h-full">
-          {isAuthenticated() ? (
+          {user ? (
             <AccountDropdown />
           ) : (
             authLinks.map((link) => (

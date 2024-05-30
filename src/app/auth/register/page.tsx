@@ -27,7 +27,7 @@ export default function RegisterPage() {
 		resolver: yupResolver(schema),
 	});
 	const router = useRouter();
-	const { refetchUser } = useUser();
+	const { refetch: refetchUser } = useUser();
 
 	const onSuccess = async ({ response }: { response: Response }) => {
 		const token = await response.json();

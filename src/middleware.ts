@@ -8,6 +8,7 @@ export async function middleware(request: NextRequest) {
   const token: Token = JSON.parse(tokenString?.value || "{}");
   const url = new URL(request.url);
 
+  // If the user is already logged in, redirect them to the home page
   if (url.pathname === "/auth/login" && token.access_token) {
     return NextResponse.redirect(url.origin);
   }
@@ -19,9 +20,10 @@ export async function middleware(request: NextRequest) {
     `${token.token_type} ${token.access_token}`,
   );
 
-  return NextResponse.next({
+  const res = NextResponse.next({
     request: { headers: requestHeaders },
   });
+  return res;
 }
 
 export const config = {

@@ -7,13 +7,13 @@ import React, { useEffect } from "react";
 import MealCard from "./mealCard";
 import { format as formatDate, isFuture } from "date-fns";
 import Loading from "@/components/loading/Loading";
-import Link from "next/link";
 
 export default function MealRecommendations() {
   const {
     data: recommendations,
     isPending,
     refetch: refetchMealRecommendations,
+    error: recommendationsError,
   } = useGetMealRecommendations();
 
   const {
@@ -53,6 +53,11 @@ export default function MealRecommendations() {
     createError,
     createMealRecommendations,
   ]);
+
+  if (recommendationsError) {
+    console.log(recommendationsError);
+    return <div className="font-bold">{recommendationsError.message}</div>;
+  }
 
   if (createError) {
     return <div className="font-bold">{createError.message}</div>;

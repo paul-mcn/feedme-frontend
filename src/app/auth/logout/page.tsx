@@ -6,21 +6,23 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 export default function Logout() {
-  const { refetchUser } = useUser();
+  const { refetch } = useUser();
   const router = useRouter();
   const query = useQuery({
     queryKey: ["logout"],
     queryFn: () => fetch("/api/auth/logout").then((res) => res.text()),
   });
 
+	console.log("query", query)
+
   useEffect(() => {
     (async () => {
       if (query.isSuccess) {
-        await refetchUser();
+        await refetch();
         router.push("/auth/login");
       }
     })();
-  }, [query, refetchUser, router]);
+  }, [query, refetch, router]);
 
   return <Loading />;
 }
