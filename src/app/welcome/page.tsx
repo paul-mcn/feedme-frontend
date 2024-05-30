@@ -15,10 +15,8 @@ export default function WelcomePage() {
     if (!data) {
       setupUser();
     }
-    // todo
   }, [setupUser, data]);
 
-  console.log(data);
   return (
     <div>
       <Loading message="Setting up account..." />

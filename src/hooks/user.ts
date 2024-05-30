@@ -23,7 +23,7 @@ export const useUser = () => {
 export const useSetupUser = () => {
   const mutation = useMutation({
     mutationFn: async (id) => {
-      return await fetchData("/api/users/me/setup-account");
+      return await fetchData("/api/users/me/setup-account", { method: "POST" });
     },
   });
 

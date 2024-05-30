@@ -1,6 +1,6 @@
-export const fetchData = async (url: string) => {
+export const fetchData = async (input: RequestInfo, options?: RequestInit) => {
   try {
-    const res = await fetch(url);
+    const res = await fetch(input, options);
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.detail);

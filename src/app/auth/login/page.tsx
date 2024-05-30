@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/user";
 import Loading from "@/components/loading/Loading";
+import Link from "next/link";
 
 export type onErrorParams = ({
   response,
@@ -116,6 +117,12 @@ export default function LoginPage() {
           >
             Login
           </button>
+          <div className="text-sm">
+            Don't have an account?{" "}
+            <Link href="/auth/register" className="text-blue-500">
+              Register
+            </Link>
+          </div>
         </Form>
       </div>
     </div>
