@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import MealCard from "./mealCard";
 import { format as formatDate, isFuture } from "date-fns";
 import Loading from "@/components/loading/Loading";
+import HorizontalLinkCard from "@/components/cards/HorizontalLinkCard";
 
 export default function MealRecommendations() {
   const {
@@ -69,11 +70,18 @@ export default function MealRecommendations() {
         <div className="font-bold text-lg">
           {"G'day! Here are the meals for this week"}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 items-center justify-center">
           {recommendations.mealRecommendations.map(({ meal, date }) => (
             <div className="flex flex-col gap-2 w-full" key={meal.id}>
               <div className="text-sm font-bold">{formatDate(date, "iii")}</div>
-              <MealCard meal={meal} />
+              <HorizontalLinkCard
+                key={meal.id}
+                imageURL={meal.imageURLs[0].id}
+                title={meal.title}
+                description={meal.description}
+								imageAlt={`Image of ${meal.title}`}
+								link={meal.snapshotURL}
+              />
             </div>
           ))}
         </div>
