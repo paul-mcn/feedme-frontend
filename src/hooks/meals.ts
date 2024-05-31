@@ -1,4 +1,5 @@
 "use client";
+import { fetchData } from "@/util/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export type Ingredient = {
@@ -56,12 +57,12 @@ type PresignedPostOut = {
   url: string;
 };
 
-const queryKey = "meals";
+export const queryKey = "meals";
 
 export const useGetMeals = () => {
   const query = useQuery({
     queryKey: [queryKey],
-    queryFn: () => fetch("/api/users/me/meals").then((res) => res.json()),
+    queryFn: () => fetchData("/api/users/me/meals"),
   });
 
   const getMeals = (): Meal[] | undefined => {
@@ -72,12 +73,7 @@ export const useGetMeals = () => {
     if (keys.length === 1 && keys[0] === "detail") return undefined;
     return query.data.meals;
   };
-
-  return {
-    meals: getMeals(),
-    isLoading: query.isPending,
-    refetchMeals: query.refetch,
-  };
+  return query;
 };
 
 export const useUpsertMealSnapshot = () => {

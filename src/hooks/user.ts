@@ -6,9 +6,11 @@ export type Token = {
   access_token: string;
 };
 
+export const queryKey = "user";
+
 export const useUser = () => {
   const query = useQuery({
-    queryKey: ["user"],
+    queryKey: [queryKey],
     queryFn: async () => {
       const res = await fetchData("/api/users/me");
       // for some reason an error is not thrown because res.ok comes back as true

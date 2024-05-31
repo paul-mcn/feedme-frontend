@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ImageWithFallback from "../images/ImageWithFallback";
 
 type HorizontalLinkCardProps = {
   imageURL: string;
@@ -33,7 +33,7 @@ export default function HorizontalLinkCard(props: HorizontalLinkCardProps) {
   return (
     <div className="flex flex-row bg-white outline outline-1 outline-gray-200 rounded-lg overflow-hidden shadow-lg gap-4 p-1 h-36">
       <div className="w-32 min-w-0 h-32 ml-1 my-auto">
-        <Image
+        <ImageWithFallback
           src={props.imageURL}
           alt={props.imageAlt}
           width={200}

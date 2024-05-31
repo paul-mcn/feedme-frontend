@@ -1,8 +1,8 @@
 import { Meal } from "@/hooks/meals";
 import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import Link from "next/link";
+import ImageWithFallback from "@/components/images/ImageWithFallback";
 
 type MealCardProps = {
   meal: Meal;
@@ -16,7 +16,7 @@ export default function mealCard(props: MealCardProps) {
     >
       <div className="relative">
         <div className="h-32 md:h-40 object-cover overflow-hidden rounded-lg">
-          <Image
+          <ImageWithFallback
             src={props.meal.imageURLs[0].id}
             alt={props.meal.title}
             width={200}

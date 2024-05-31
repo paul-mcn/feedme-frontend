@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-	return new NextResponse("Successfully logged out", {
-		headers: {
-			'Set-Cookie': 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT',
-		},
-	})
+export async function POST() {
+  // const res = NextResponse.json({ success: true });
+  // res.cookies.delete("token");
+  cookies().delete("token");
+  return NextResponse.json({ success: true });
 }

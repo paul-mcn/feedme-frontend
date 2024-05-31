@@ -22,7 +22,8 @@ export type MealRecommendations = {
   expirationDate: Date;
 };
 
-const queryKey = "mealRecommendations";
+export const queryKey = "mealRecommendations";
+
 export const useGetMealRecommendations = () => {
   const query = useQuery({
     queryKey: [queryKey],

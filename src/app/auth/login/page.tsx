@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/components/fields/Input";
 import H1 from "@/components/headings/H1";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Form, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -43,10 +43,10 @@ export default function LoginPage() {
   const { refetch: refetchUser, data: user, error } = useUser();
 
   useEffect(() => {
-    if (user && !error && isSubmitSuccessful) {
-      router.push("/");
+    if (user && !error) {
+      router.push("/meals");
     }
-  }, [user, router, isSubmitSuccessful]);
+  }, [user, router, error]);
 
   const onSuccess = async () => {
     await refetchUser();
@@ -71,10 +71,11 @@ export default function LoginPage() {
     }
   };
 
+  // form cannot be unmounted so its just hidden for the loading effect
   return (
     <div className="max-w-md mx-auto">
-      {isSubmitting && <Loading />}
-      <div className={isSubmitting ? "hidden" : "block"}>
+      {(isSubmitting || isSubmitSuccessful) && <Loading />}
+      <div className={isSubmitting || isSubmitSuccessful ? "hidden" : "block"}>
         <H1 text="Login" />
         <Form
           action="/api/auth/login"
