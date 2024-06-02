@@ -72,7 +72,7 @@ export const queryKey = "user-meals";
  */
 export const useGetMeals = (filters: Array<string> = []) => {
   const keys = [queryKey, ...filters];
-  const query = useQuery<Meal[]>({
+  const query = useQuery({
     queryKey: keys,
     queryFn: () => {
       if (filters?.length > 0) {
