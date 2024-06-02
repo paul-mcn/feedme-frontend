@@ -1,8 +1,9 @@
+"use client"
 import React, { useState } from "react";
 import Image, { ImageProps } from "next/image";
 
 type ImageWithFallback = ImageProps & {
-  fallbackSrc: string;
+  fallbackSrc?: string;
 };
 
 const ImageWithFallback = (props: ImageWithFallback) => {

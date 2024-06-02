@@ -29,9 +29,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <NavBar />
-          <div className="bg-gray-100 min-h-screen">
-            <div className="w-10/12 md:w-4/5 mx-auto">{children}</div>
+          <div className="flex flex-col max-h-screen">
+            <div className="flex-1">
+              <NavBar />
+            </div>
+            <div className="bg-gray-100 min-h-[88vh]">
+              {children}
+            </div>
           </div>
         </Providers>
       </body>

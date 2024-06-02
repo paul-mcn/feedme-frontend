@@ -4,7 +4,6 @@ import {
   useGetMealRecommendations,
 } from "@/hooks/mealRecommendations";
 import React, { useEffect } from "react";
-import MealCard from "./mealCard";
 import { format as formatDate, isFuture } from "date-fns";
 import Loading from "@/components/loading/Loading";
 import HorizontalLinkCard from "@/components/cards/HorizontalLinkCard";

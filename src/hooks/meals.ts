@@ -1,6 +1,11 @@
 "use client";
 import { fetchData } from "@/util/api";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  QueryFunction,
+} from "@tanstack/react-query";
 
 export type Ingredient = {
   unit: string;
@@ -13,7 +18,7 @@ export type IngredientGroup = {
   groupValues: Ingredient[];
 };
 
-type imageURLs = {
+type ImageURLs = {
   id: string;
 };
 
@@ -22,7 +27,7 @@ export type Meal = {
   title: string;
   ingredients: IngredientGroup[] | string;
   description: string;
-  imageURLs: imageURLs[];
+  imageURLs: ImageURLs[];
   price: number;
   time: number;
   snapshotURL?: string;
@@ -35,7 +40,7 @@ export type MealCreate = {
   description: string;
   price: number;
   time: number;
-  imageURLs?: imageURLs[];
+  imageURLs?: ImageURLs[];
   snapshotURL?: string;
   notes?: string;
 };
@@ -57,22 +62,26 @@ type PresignedPostOut = {
   url: string;
 };
 
-export const queryKey = "meals";
+export const queryKey = "user-meals";
 
-export const useGetMeals = () => {
-  const query = useQuery({
-    queryKey: [queryKey],
-    queryFn: () => fetchData("/api/users/me/meals"),
+/**
+ * For user-specific meals
+ *
+ * @param {Array<string>} [filters] - filters for query
+ * @returns Meal Array
+ */
+export const useGetMeals = (filters: Array<string> = []) => {
+  const keys = [queryKey, ...filters];
+  const query = useQuery<Meal[]>({
+    queryKey: keys,
+    queryFn: () => {
+      if (filters?.length > 0) {
+        console.log("filters", filters);
+        return fetchData("/api/users/me/meals");
+      }
+      return fetchData("/api/users/me/meals");
+    },
   });
-
-  const getMeals = (): Meal[] | undefined => {
-    // dodgy hack to get user or undefined
-    // until i can find a better way to return no user from server
-    if (!query.data) return undefined;
-    const keys = Object.keys(query.data);
-    if (keys.length === 1 && keys[0] === "detail") return undefined;
-    return query.data.meals;
-  };
   return query;
 };
 

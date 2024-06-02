@@ -8,11 +8,11 @@ type MealCardProps = {
   meal: Meal;
 };
 
-export default function mealCard(props: MealCardProps) {
+export default function MealCard(props: MealCardProps) {
   return (
     <div
       key={props.meal.id}
-      className="group cursor-pointer h-full w-full md:w-40"
+      className="group cursor-pointer h-full w-40"
     >
       <div className="relative">
         <div className="h-32 md:h-40 object-cover overflow-hidden rounded-lg">

@@ -11,6 +11,7 @@ const NavBar = () => {
   const links = [
     { name: "Home", href: "/" },
     { name: "Meals", href: "/meals" },
+    { name: "Explore", href: "/explore" },
   ];
 
   const authLinks = [
@@ -19,7 +20,7 @@ const NavBar = () => {
   ];
 
   return (
-    <div className="bg-white w-full h-20 sticky top-0 z-10">
+    <div className="bg-white w-full h-[12vh] z-10">
       <div className="flex flex-row w-4/5 mx-auto h-full justify-between">
         <ul className="flex flex-row items-center text-gray-900 gap-4 h-full font-bold">
           {links.map((link) => (
@@ -31,7 +32,7 @@ const NavBar = () => {
             </li>
           ))}
         </ul>
-        <ul className="flex flex-row items-center text-gray-900 gap-4 h-full">
+        <ul className="flex flex-row items-center text-gray-900 gap-4 h-full z-20">
           {user ? (
             <AccountDropdown />
           ) : (

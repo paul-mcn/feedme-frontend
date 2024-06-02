@@ -1,6 +1,6 @@
 "use client";
 import { Meal, useGetMeals } from "@/hooks/meals";
-import MealCard from "./mealCard";
+import MealCard from "@/components/cards/MealCard"
 import Loading from "@/components/loading/Loading";
 
 export default function Meals() {
