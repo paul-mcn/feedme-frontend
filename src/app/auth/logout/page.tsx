@@ -9,7 +9,6 @@ import { queryKey as mealsQueryKey } from "@/hooks/meals";
 import { fetchData } from "@/util/api";
 
 export default function Logout() {
-  const { refetch } = useUser();
   const queryClient = useQueryClient();
   const router = useRouter();
   const logout = useMutation({
@@ -29,11 +28,10 @@ export default function Logout() {
         await logout.mutateAsync();
       }
       if (logout.isSuccess) {
-        await refetch();
         router.push("/auth/login");
       }
     })();
-  }, [logout, refetch, router]);
+  }, [logout, router]);
 
   return <Loading />;
 }
