@@ -30,15 +30,14 @@ export default function RegisterPage() {
   const router = useRouter();
   const { refetch: refetchUser } = useUser();
 
-  const onSuccess = async ({ response }: { response: Response }) => {
-    const token = await response.json();
-    setCookie("token", JSON.stringify(token));
-    refetchUser();
+  const onSuccess = async () => {
+    await refetchUser();
     router.push("/welcome");
   };
 
   const onError: onErrorParams = async ({ response }) => {
     if (response) {
+      console.log({ response });
       const isJson = response.headers
         .get("content-type")
         ?.includes("application/json");
