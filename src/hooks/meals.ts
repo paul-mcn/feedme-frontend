@@ -70,16 +70,26 @@ export const queryKey = "user-meals";
  * @param {Array<string>} [filters] - filters for query
  * @returns Meal Array
  */
-export const useGetMeals = (filters: Array<string> = []) => {
+export const useGetMeals = (
+  filters: Array<{}> = [],
+  options = { limit: 100, lastId: "" },
+) => {
   const keys = [queryKey, ...filters];
   const query = useQuery({
     queryKey: keys,
     queryFn: () => {
+      const params = new URLSearchParams();
+      options.limit && params.append("limit", String(options.limit));
+      options.lastId &&
+        params.append("lastEvaluatedKey", String(options.lastId));
       if (filters?.length > 0) {
-        console.log("filters", filters);
-        return fetchData("/api/users/me/meals");
+        throw new Error("Not implemented 🙃");
       }
-      return fetchData("/api/users/me/meals");
+      // if (filters?.length > 0) {
+      //   return fetchData("/api/users/me/meals");
+      // }
+      const queryParam = params.size > 0 ? "?" + params.toString() : "";
+      return fetchData("/api/users/me/meals" + queryParam);
     },
   });
   return query;
@@ -191,4 +201,26 @@ export const useAddMeal = () => {
     addMeal: addMeal,
     isLoading: addMealMutation.isPending || imageUploadMutation.isPending,
   };
+};
+
+export const useFollowMeal = () => {
+  // const queryClient = useQueryClient();
+  const followMutation = useMutation({
+    mutationFn: (mealId: string) => {
+      return fetchData("/api/users/me/meals/follow", {
+        method: "POST",
+        body: JSON.stringify({ mealId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    },
+    onSuccess: (data, variables) => {
+      // queryClient.setQueryData([queryKey, { id }], (oldData: any) => {
+      //   console.log(oldData);
+      //   return oldData;
+      // });
+    },
+  });
+  return followMutation;
 };

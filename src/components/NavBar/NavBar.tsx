@@ -4,20 +4,20 @@ import { usePathname } from "next/navigation";
 import AccountDropdown from "./AccountDropdown";
 import { useUser } from "@/hooks/user";
 
+const links = [
+  { name: "Home", href: "/" },
+  { name: "Meals", href: "/meals" },
+  { name: "Explore", href: "/explore" },
+];
+
+const authLinks = [
+  { name: "Login", href: "/auth/login" },
+  { name: "Register", href: "/auth/register" },
+];
+
 const NavBar = () => {
   const router = usePathname();
   const { data: user } = useUser();
-
-  const links = [
-    { name: "Home", href: "/" },
-    { name: "Meals", href: "/meals" },
-    { name: "Explore", href: "/explore" },
-  ];
-
-  const authLinks = [
-    { name: "Login", href: "/auth/login" },
-    { name: "Register", href: "/auth/register" },
-  ];
 
   return (
     <div className="bg-white w-full h-[12vh] z-10">

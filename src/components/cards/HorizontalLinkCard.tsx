@@ -32,13 +32,12 @@ export default function HorizontalLinkCard(props: HorizontalLinkCardProps) {
   };
   return (
     <div className="flex flex-row bg-white outline outline-1 outline-gray-200 rounded-lg overflow-hidden shadow-lg gap-4 p-1 h-36">
-      <div className="w-32 min-w-0 h-32 ml-1 my-auto">
+      <div className="w-32 min-w-0 h-32 ml-1 my-auto rounded-lg overflow-hidden">
         <ImageWithFallback
           src={props.imageURL}
           alt={props.imageAlt}
-          width={200}
-          height={200}
-          className="rounded-lg"
+          width={128}
+          height={128}
           priority
         />
       </div>

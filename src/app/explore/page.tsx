@@ -1,5 +1,4 @@
 "use client";
-import MealCard from "@/components/cards/MealCard";
 import Input from "@/components/fields/Input";
 import React, { useState } from "react";
 import ExploreFilterForm, {
@@ -49,7 +48,7 @@ export default function ExplorePage() {
             </select>
           </div>
         </div>
-        <div className="max-h-[79vh] overflow-y-auto mx-2 md:mx-4 pt-10">
+        <div className="max-h-[79vh] overflow-y-auto mx-2 md:mx-4 py-10">
           <CatalogItems />
         </div>
       </div>
