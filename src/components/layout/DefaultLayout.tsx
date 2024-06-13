@@ -2,7 +2,7 @@ import React from "react";
 
 type DefaultLayoutProps = {
   children: React.ReactNode;
-	title: string;
+  title?: string;
 };
 
 export default function DefaultLayout(props: DefaultLayoutProps) {
