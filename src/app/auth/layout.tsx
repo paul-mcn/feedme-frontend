@@ -1,3 +1,4 @@
+import DefaultLayout from "@/components/layout/DefaultLayout";
 import React from "react";
 
 export default function AuthLayout({
@@ -5,10 +6,5 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  return (
-    <div className="bg-gray-100">
-      <div className="md:w-4/5 mx-auto py-16">{children}</div>
-    </div>
-  );
+  return <DefaultLayout>{children}</DefaultLayout>;
 }
