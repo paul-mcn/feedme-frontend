@@ -1,7 +1,9 @@
 "use client";
 import { Meal, useGetMeals } from "@/hooks/meals";
-import MealCard from "@/components/cards/MealCard"
+import MealCard from "@/components/cards/MealCard";
 import Loading from "@/components/loading/Loading";
+import Link from "next/link";
+import HoverStyledCard from "@/components/cards/HoverStyledCard";
 
 export default function Meals() {
   const { data, isPending, error } = useGetMeals();
@@ -22,9 +24,13 @@ export default function Meals() {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
       {data.meals.map((meal: Meal) => (
-        <MealCard key={meal.id} meal={meal} />
+        <HoverStyledCard>
+          <Link href={meal.snapshotURL || "/"}>
+            <MealCard key={meal.id} meal={meal} />
+          </Link>
+        </HoverStyledCard>
       ))}
     </div>
   );

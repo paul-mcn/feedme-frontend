@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import ImageWithFallback from "../images/ImageWithFallback";
+import { getOrigin, getNameFromUrl } from "@/util/getUrlParts";
 
 type HorizontalLinkCardProps = {
   imageURL: string;
@@ -11,25 +12,6 @@ type HorizontalLinkCardProps = {
 };
 
 export default function HorizontalLinkCard(props: HorizontalLinkCardProps) {
-  const getOrigin = (urlString: string) => {
-    try {
-      const url = new URL(urlString);
-      return url.origin;
-    } catch (error) {
-      console.log(error);
-      return "";
-    }
-  };
-  const getNameFromUrl = (urlString: string) => {
-    try {
-      const url = new URL(urlString);
-      const host = url.host.replace("www.", "").split(".")[0];
-      return host;
-    } catch (error) {
-      console.log(error);
-      return "";
-    }
-  };
   return (
     <div className="flex flex-row bg-white outline outline-1 outline-gray-200 rounded-lg overflow-hidden shadow-lg gap-4 p-1 h-36">
       <div className="w-32 min-w-0 h-32 ml-1 my-auto rounded-lg overflow-hidden">

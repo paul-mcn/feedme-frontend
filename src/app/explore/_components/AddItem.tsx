@@ -17,7 +17,7 @@ export default function AddItem(props: AddItemProps) {
   };
   return (
     <Button
-      className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 pl-2 pr-1.5 rounded text-center disabled:bg-gray-400 transition-colors"
+      className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 pl-2 pr-1.5 rounded text-center disabled:bg-gray-400 transition-colors h-9"
       disabled={followMeal.isPending || followMeal.isSuccess}
       label={
         <div className="flex flex-row gap-1 items-center">

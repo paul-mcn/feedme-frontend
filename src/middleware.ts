@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { Token } from "./hooks/user";
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   const tokenString = request.cookies.get("token");
   const token: Token = JSON.parse(tokenString?.value || "{}");
@@ -21,5 +20,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/auth/login", "/api/users/me/:path*", "/api/file/image-upload", "/api/meals"],
+  matcher: [
+    "/auth/login",
+    "/api/users/me",
+    "/api/users/me/:path*",
+    "/api/file/image-upload",
+    "/api/meals",
+  ],
 };

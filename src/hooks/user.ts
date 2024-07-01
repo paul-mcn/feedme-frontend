@@ -1,5 +1,5 @@
 import { fetchData } from "@/util/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { isServer, useMutation, useQuery } from "@tanstack/react-query";
 
 export type Token = {
   token_type: string;
@@ -8,16 +8,19 @@ export type Token = {
 
 export const queryKey = "user";
 
+export const fetchUser = async (options?: RequestInit) => {
+  const res = await fetchData("/api/users/me", options);
+  // for some reason an error is not thrown because res.ok comes back as true
+  // even though the response is an error :(
+  // This appears to only be unique to /api/users/me
+  if (res.detail) throw new Error(res.detail);
+  return res;
+};
+
 export const useUser = () => {
   const query = useQuery({
     queryKey: [queryKey],
-    queryFn: async () => {
-      const res = await fetchData("/api/users/me");
-      // for some reason an error is not thrown because res.ok comes back as true
-      // even though the response is an error :(
-      if (res.detail) throw new Error(res.detail);
-      return res;
-    },
+    queryFn: fetchUser,
   });
   return query;
 };

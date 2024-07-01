@@ -3,6 +3,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Providers from "./providers";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { fetchUser, queryKey } from "@/hooks/user";
+import { QueryClient } from "@tanstack/react-query";
+import getAuthToken from "@/util/getAuthToken";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,23 +24,42 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: [queryKey],
+    queryFn: async () => {
+      const token = getAuthToken();
+
+      const options: RequestInit = {};
+      if (token) {
+        options.headers = {
+          Accept: "application/json",
+          authorization: `${token.token_type} ${token.access_token}`,
+        };
+      }
+
+      return await fetch("/api/users/me", options);
+    },
+  });
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="flex flex-col max-h-screen">
-            <div className="flex-1">
-              <NavBar />
+          <HydrationBoundary state={dehydrate(queryClient)}>
+            <div className="flex flex-col max-h-screen">
+              <div className="flex-1">
+                <NavBar />
+              </div>
+              <div className="bg-gray-100 min-h-[88vh]">{children}</div>
             </div>
-            <div className="bg-gray-100 min-h-[88vh]">
-              {children}
-            </div>
-          </div>
+          </HydrationBoundary>
         </Providers>
       </body>
     </html>
