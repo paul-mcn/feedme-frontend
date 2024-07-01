@@ -20,7 +20,7 @@ export default function CatalogItems() {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-10 md:gap-y-20 place-items-center">
         {data.meals.map((meal, idx) => {
           return (
-            <HoverStyledCard className="relative">
+            <HoverStyledCard key={meal.id} className="relative">
               <Link href={meal.snapshotURL || "/"}>
                 <div className="h-72" key={meal.id}>
                   <MealCard key={idx} meal={meal} />
